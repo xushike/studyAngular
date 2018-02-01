@@ -1,21 +1,16 @@
 import { Component } from '@angular/core';
-import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
-
-export class Hero {
-  id: number;
-  name: string;
-}
-
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    template: `
+    <h1>{{title}}</h1>
+    <nav>
+    <a routerLink="/dashboard">Dashboard</a>
+    <a routerLink="/heroes">Heroes</a>
+  </nav>
+    <a routerLink="/heroes">Heroes</a>
+    <router-outlet></router-outlet>
+  `
 })
-export class AppComponent  {
-  title = 'Tour of Heroes';
-
-  hero: Hero = {
-    id: 1,
-    name: 'Windstorm'
-  };
+export class AppComponent {
+    title = 'Tour of Heroes';
 }
