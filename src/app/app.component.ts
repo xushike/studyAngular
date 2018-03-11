@@ -1,4 +1,4 @@
-import { Component, ViewChild, TemplateRef } from '@angular/core';
+import { Component, ViewChild, TemplateRef, ViewContainerRef } from '@angular/core';
 @Component({
   selector: 'app-root',
   template: `
@@ -8,13 +8,10 @@ import { Component, ViewChild, TemplateRef } from '@angular/core';
     <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
   </nav>
   <router-outlet></router-outlet>
-  <ng-template #tpl>
-  <span>I am span in template</span>
-</ng-template>
-<p>slkjfdlkasfjlkdsjlf;jdsl;fajldksjklfjkslfjlkdsfjlkdsj</p>
 
-<ng-template [ngIf]="true"> <label>hello</label></ng-template>
-<label *ngIf="true">hello2</label>
+  <template #tpl>
+    <span>I am span in template</span>
+  </template>
 `,
   styleUrls: ['./app.component.css'],
 
@@ -28,9 +25,16 @@ export class AppComponent {
 
   bool: Boolean = true;
 
+  @ViewChild('tpl')
+  tplRef: TemplateRef<any>;
+
+  @ViewChild('tpl', { read: ViewContainerRef })
+  tplVcRef: ViewContainerRef;
+
   ngAfterViewInit() {
-    let embeddedView = this.tpl.createEmbeddedView(null);
-    console.dir(embeddedView);
+    console.dir(this.tpl);
+    console.dir(this.tplVcRef);
+    // this.tplVcRef.createEmbeddedView(this.tplRef);
   }
 
 }
